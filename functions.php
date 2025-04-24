@@ -5,6 +5,9 @@
  * Se carga en el archivo principal del plugin.
  */
 
+ /**
+  * Esta funcion incluye los archivos de funciones que se encuentran en el directorio src/actions y src/filters
+  */
 function include_files($files){
 
     if (isset($files) && is_array($files)) {
@@ -15,6 +18,7 @@ function include_files($files){
     return;
 }
 
+// array con el nombre de los path a cargar
 $array_path = ['actions', 'filters'];
 
 foreach ($array_path as $path) {    
