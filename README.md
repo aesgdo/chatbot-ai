@@ -1,6 +1,6 @@
 # Chatbot-AI v1.0
 
-    Plugin de Wordpress para usar con la API de OpenAI y utilizarlo como un agente de inteligencia Artificial o chatbot que responda preguntas sobre un contexto definido.
+Plugin de Wordpress para usar con la API de OpenAI y utilizarlo como un agente de inteligencia Artificial o chatbot que responda preguntas sobre un contexto definido.
 
 ### Instalación
 
