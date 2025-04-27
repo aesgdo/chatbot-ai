@@ -7,13 +7,17 @@ function launch_chatbot_ai() {
    
       <div id="chatbot_ai_wrapper" class="chatbot_ai_wrapper botton_right">
       
-         <div class="chatbot_ai_container expanded no-show">
+         <div class="chatbot_ai_container no-show">
 
+            <div class="chatbot_ai_header">
+               
+            </div>
+               
          </div>
 
          <button id="chatbot_ai_button" class="chatbot_ai_button">
-            <span class="">OpenChat</span>
-            <span class="no-show">X</span>
+            <span class="message_icon"><i class="fa-regular fa-message"></i></span>
+            <span class="no-show"><i class="fas fa-times"></i></span>
          </button>
 
       </div>
