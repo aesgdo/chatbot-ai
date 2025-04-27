@@ -4,8 +4,15 @@
     max-width: 100%;
     z-index: 9999;
     transition: 0.3s ease-in-out;
-    width: 105px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
+    animation-name: scaling;
+    animation-duration: 1s;
+}
+
+@keyframes scaling {
+    0% {transform: scale(0);}
+    100% {transform: scale(1);}
 }
 
 .chatbot_ai_wrapper.expanded{    
@@ -17,6 +24,18 @@
     transition: 0.3s ease-in-out;
     display: flex;
     flex-direction: column-reverse;
+}
+
+@media screen and (max-height: 768px){
+    .chatbot_ai_wrapper.expanded{            
+        height: 335px;
+    }
+}
+
+@media screen and (max-height: 375px){
+    .chatbot_ai_wrapper.expanded{            
+        height: 250px;
+    }
 }
 
 /* container */
@@ -32,15 +51,35 @@
 
 /* botton */
 .chatbot_ai_wrapper.botton_right {
-    right: 20px;
-    bottom: 20px;
+    right: 6px;
+    bottom: 18px;
 }
 .chatbot_ai_button{
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 6px;
+    top: 6px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.chatbot_ai_button .message_icon.animated{
+    display: block; 
+    transition: 0.3s ease-in-out;         
+    animation-name: sipzap;
+    animation-duration: 0.3s;    
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation-iteration-count:initial;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 3;
+}
+
+@keyframes sipzap {
+    0% {transform: rotate(-5deg);}
+    50% {transform: rotate(5deg);}
+    100% {transform: rotate(0deg);}
 }
 
 .chatbot_ai_button.vanish{
@@ -58,4 +97,5 @@
     font-weight: bold;
     color: gray;
     background: #ffffff;
+    border: unset;
 }
