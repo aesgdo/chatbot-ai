@@ -25,11 +25,19 @@ include(plugin_dir_path(__FILE__).'admin/settings.php');
 // incluimos el archivo de que invoca las funciones actions y filters
 include(plugin_dir_path(__FILE__).'functions.php');
 
+// incluimos jquery para el uso de ajax
+add_action('wp_enqueue_scripts', function() { wp_enqueue_script('jquery'); });
+
 // Hook para cargar scripts y estilos
 add_action('admin_enqueue_scripts', 'chatbot_ai_charge_admin_scripts');
+
+// Hook para cargar scripts y estilos en el front-end
+add_action('wp_enqueue_scripts', 'chatbot_ai_charge_front_end_scripts');
 
 // Hook para agregar el enlace de "Ajustes" al lado de "Desactivar"
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'chatbot_ai_add_link_settings');
 
 // agrega el menu de configuracion al back-end de wordpress
 add_action('admin_menu','chatbot_ai_menu'); 
+
+add_action('wp_footer', 'launch_chatbot_ai', 100); 
