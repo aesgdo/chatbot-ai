@@ -24,7 +24,7 @@
                 <p><span class="title">Chatbot:</span><br><span class="msg">Hola, soy un asistente virtual. ¿Cuál es tu nombre?</span></p>
             </div>
 
-            <div class="user no-show">
+            <!-- <div class="user no-show">
                 <p><span class="title">Yo:</span><br><span class="msg">Pepe</span></p>
             </div>
 
@@ -43,12 +43,12 @@
             <div class="user no-show">
                 <p><span class="title">Yo:</span><br><span class="msg">Quiero una beca</span><br><span class="msg">para poder estudiar Derecho</span></p>
                 
-            </div>
+            </div> -->
             
         </div>
 
         <div class="chatbot_ai_body_input_wrap">
-            <input type="text" id="chatbot_ai_input" class="chatbot_ai_input" placeholder="Escribe tu nombre aquí...">
+            <input type="text" id="chatbot_ai_input" class="chatbot_ai_input" placeholder="Escribe tu nombre aquí..." required>
             <br>
             <button id="chatbot_ai_btn_start" class="chatbot_ai_btn_start">
                 <span>Iniciar Chat</span>
