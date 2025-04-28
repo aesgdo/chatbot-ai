@@ -109,6 +109,10 @@
     transition: 0.3s ease-in-out;
 }
 
+.user_name_error{    
+    border: 3px solid red !important;    
+}
+
 .chatbot_ai_header.chat_started{ 
     height: 0px;   
     transition: 0.3s ease-in-out;
@@ -168,6 +172,7 @@
     font-size: 12px;
     font-style: normal;
     text-align: left;
+    margin-left: 8px;
 }
 
 
