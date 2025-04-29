@@ -73,7 +73,7 @@ const enqueueUserMessages = (user_message) => {
 const handleUserInput = () => {
     
     const chatbot_ai_input = jQuery('.chatbot_ai_input');
-    const user_message = chatbot_ai_input.val(); chatbot_ai_input.val("");
+    const user_message = chatbot_ai_input.val().trim(); chatbot_ai_input.val("");
     //console.log(user_message);
     
     const lastchild = jQuery('.chatbot_ai_body_message_wrap').children().last();
@@ -133,7 +133,7 @@ jQuery(window).on('load', () => {
     jQuery('.chatbot_ai_btn_start').on('click', function(ev) {
         console.log('start button clicked');
 
-        let user_name = jQuery('.chatbot_ai_input').val();
+        let user_name = jQuery('.chatbot_ai_input').val().trim();
 
         // si el nombre de usuario es menor a 1, entonces se muestra un error
         if ( user_name.length < 1){
