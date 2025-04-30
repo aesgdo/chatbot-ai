@@ -1,5 +1,9 @@
 
-
+/**
+ * Esta funcion se encarga de enviar el mensaje al servidor
+ * y recibir la respuesta del chatbot
+ * @param {array} array_chat 
+ */
 const sendMessageToChatbot = async (array_chat) => {
 
     const url = './wp-content/plugins/chatbot-ai/src/api/index.php';
