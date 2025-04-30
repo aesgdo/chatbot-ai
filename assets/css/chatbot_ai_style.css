@@ -214,6 +214,7 @@
 .chatbot_ai_body_message_wrap{
     width: 100%;
 }
+
 .chatbot_ai_body_message_wrap .chatbot{
     display: flex;
     margin-right: auto;   
@@ -253,3 +254,24 @@
     border-radius: 9px;
     max-width: calc(100% - 20px);
 }
+
+/* Start Dark Mode */
+
+.dark .chatbot_ai_btn_start,
+.dark .chatbot_ai_body_message_wrap .chatbot p,
+.dark .chatbot_ai_body_message_wrap .user p,
+.dark .chatbot_ai_body.chat_started,
+.dark .chatbot_ai_wrapper.expanded 
+{
+    background-color: #333 !important;    
+
+}
+
+.dark .chatbot_ai_button,
+.dark .chatbot_ai_container,
+.dark .chatbot_ai_body_message_wrap
+{
+    background-color: #484848 !important;
+}
+
+/* End Dark Mode */
