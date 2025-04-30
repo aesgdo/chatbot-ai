@@ -36,7 +36,7 @@ const enqueueUserMessages = (user_message) => {
 
     if (
         typeof localStorage.chat === 'undefined' || 
-               localStorage.chat === null        || 
+               localStorage.chat === 'null'      || 
                localStorage.chat === ""
        ){
 
@@ -70,6 +70,21 @@ const enqueueUserMessages = (user_message) => {
 
 }
 
+const setBotFirstMessage = () => {
+
+    const firstBotMessage = "Hola, soy un asistente virtual. ¿Cuál es tu nombre?";
+    
+    jQuery('.chatbot_ai_body_message_wrap').append(`
+        <div class="chatbot">
+            <p>
+                <span class="title">Chatbot:</span><br>
+                <span class="msg">${firstBotMessage}</span>
+            </p>
+        </div>`
+    );
+
+};
+
 const handleUserInput = () => {
     
     const chatbot_ai_input = jQuery('.chatbot_ai_input');
@@ -100,8 +115,102 @@ const handleUserInput = () => {
 
 }
 
+const resetChatBotAI = () => {
+
+    localStorage.chat = 'null';
+
+    // eliminamos un evento para que al presionar enter se envíe el mensaje
+    jQuery(window).off('keydown', handleKeyPress );
+
+    if ( jQuery('.chatbot_ai_btn_start').hasClass('chat_started') ) {
+
+        jQuery('.welcome_message').removeClass('no-show');
+        jQuery('.chatbot').toggleClass('no-show');
+        //jQuery('.user').toggleClass('no-show');
+        
+        jQuery('.chatbot_ai_btn_start').removeClass('chat_started');
+        jQuery('.chatbot_ai_btn_start span').toggleClass('no-show');
+        
+        jQuery('.chatbot_ai_header').removeClass('chat_started');
+        jQuery('.chatbot_ai_header').removeClass('no-show');    
+        
+        jQuery('.chatbot_ai_body').removeClass('chat_started');
+        
+        jQuery('.chatbot_ai_body_input_wrap').removeClass("chat_started");
+        
+        jQuery('.chatbot_ai_input').removeClass('chat_started');
+    
+        jQuery('.chatbot_ai_input').attr('placeholder', 'Escribe tu nombre aquí...');
+    
+        jQuery('.chatbot_ai_body_message_wrap .user').remove();
+        jQuery('.chatbot_ai_body_message_wrap .chatbot').remove();    
+
+    };
+    
+};
+
+const restoreChatMessages = () => {
+
+    if ( 
+        localStorage.chat !== 'null' && 
+        localStorage.chat !== undefined && 
+        localStorage.chat !== "" 
+    ){
+
+        // agregamos un evento para que al presionar enter se envíe el mensaje
+        jQuery(window).on('keydown', handleKeyPress );
+
+        jQuery('.chatbot_ai_header').addClass('no-show');
+        jQuery('.chatbot_ai_body').addClass('chat_started');
+        jQuery('.welcome_message').addClass('no-show');
+
+        jQuery('.chatbot_ai_body_input_wrap').addClass('chat_started');
+        jQuery('.chatbot_ai_input').addClass('chat_started');
+        jQuery('.chatbot_ai_btn_start').addClass('chat_started');
+        jQuery('.chatbot_ai_btn_start span').toggleClass('no-show');
+        
+
+        const array_chat = JSON.parse(localStorage.chat);
+
+        array_chat.forEach((message) => {
+            if ( message.role === 'user' ) {
+                jQuery('.chatbot_ai_body_message_wrap').append(`
+                    <div class="user">
+                        <p>
+                            <span class="title">Yo:</span><br>
+                            <span class="msg">${message.content}</span>
+                        </p>
+                    </div>`
+                );
+            }
+            else{
+                jQuery('.chatbot_ai_body_message_wrap').append(`
+                    <div class="chatbot">
+                        <p>
+                            <span class="title">Chatbot:</span><br>
+                            <span class="msg">${message.content}</span>
+                        </p>
+                    </div>`
+                );
+            }
+        });
+
+    }
+};
+
+const handleKeyPress = (ev) => {
+        
+    if (ev.keyCode === 13) {
+        ev.preventDefault();
+        handleUserInput();
+    }
+
+}
+
 jQuery(window).on('load', () => {
     
+    restoreChatMessages();
+
     /**
      * * Chatbot AI Button Click Event
      * * This function toggles the visibility of the chatbot AI wrapper and button.
@@ -115,6 +224,8 @@ jQuery(window).on('load', () => {
         setTimeout(function() {            
             jQuery('.chatbot_ai_button').toggleClass('vanish');
             jQuery('.chatbot_ai_button span').toggleClass('no-show');
+            jQuery('.chatbot_ai_anchor_reset_chat').toggleClass('no-show');
+            
         }, 300);       
 
         jQuery('.chatbot_ai_input').removeClass('user_name_error');
@@ -133,7 +244,7 @@ jQuery(window).on('load', () => {
     jQuery('.chatbot_ai_btn_start').on('click', function(ev) {
         console.log('start button clicked');
 
-        let user_name = jQuery('.chatbot_ai_input').val().trim();
+        const user_name = jQuery('.chatbot_ai_input').val().trim();
 
         // si el nombre de usuario es menor a 1, entonces se muestra un error
         if ( user_name.length < 1){
@@ -147,14 +258,10 @@ jQuery(window).on('load', () => {
             // si el chart no ha comenzado, entonces se inicia el chat
             if ( ! jQuery('.chatbot_ai_btn_start').hasClass('chat_started')) {
                 
+                setBotFirstMessage();
+
                 // agregamos un evento para que al presionar enter se envíe el mensaje
-                jQuery(window).on('keydown', function(ev) {
-                    // console.log(ev.keyCode);
-                    if (ev.keyCode === 13) {
-                        ev.preventDefault();
-                        handleUserInput();
-                    }
-                });
+                jQuery(window).on('keydown', handleKeyPress );
 
                 jQuery('.chatbot_ai_header').toggleClass('vanish');
                 jQuery('.chatbot_ai_btn_start span').toggleClass('vanish no-show');
@@ -165,7 +272,7 @@ jQuery(window).on('load', () => {
                 setTimeout(function() {
                     
                     jQuery('.welcome_message').toggleClass('no-show');
-                    jQuery('.chatbot').toggleClass('no-show');
+                    //jQuery('.chatbot').toggleClass('no-show');
                     //jQuery('.user').toggleClass('no-show');
                     
                     jQuery('.chatbot_ai_btn_start').addClass('chat_started');
@@ -200,6 +307,7 @@ jQuery(window).on('load', () => {
 
     });
 
+    jQuery('.chatbot_ai_anchor_reset_chat').on('click', resetChatBotAI );
     
 
 });

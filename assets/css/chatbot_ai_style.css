@@ -153,6 +153,15 @@
     transition: 0.3s ease-in-out;
 }
 
+.chatbot_ai_anchor_reset_chat {
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 12px;
+    font-size: 10px;
+    color: #6fc2f5;
+}
+
 .chatbot_ai_body_input_wrap.chat_started{    
     flex-direction: unset;
     transition: 0.3s ease-in-out;
@@ -172,7 +181,7 @@
     font-size: 12px;
     font-style: normal;
     text-align: left;
-    margin-left: 8px;
+    margin: 0;
 }
 
 
