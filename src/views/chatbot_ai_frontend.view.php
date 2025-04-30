@@ -19,31 +19,6 @@
             <div class="welcome_message">
                 <p>Hola, soy un asistente virtual. ¿Cuál es tu nombre?</p>
             </div>
-
-            <div class="chatbot no-show">
-                <p><span class="title">Chatbot:</span><br><span class="msg">Hola, soy un asistente virtual. ¿Cuál es tu nombre?</span></p>
-            </div>
-
-            <!-- <div class="user no-show">
-                <p><span class="title">Yo:</span><br><span class="msg">Pepe</span></p>
-            </div>
-
-            <div class="chatbot no-show">
-                <p><span class="title">Chatbot:</span><br><span class="msg">Hola, Pepe, en que puedo ayudarte?</span></p>
-            </div>
-
-            <div class="user no-show">
-                <p><span class="title">Yo:</span><br><span class="msg">cuales servicios ofrecen en esta pagina.</span></p>
-            </div>
-
-            <div class="chatbot no-show">
-                <p><span class="title">Chatbot:</span><br><span class="msg">Son muchos, mejor dique que buscas?</span></p>
-            </div>
-
-            <div class="user no-show">
-                <p><span class="title">Yo:</span><br><span class="msg">Quiero una beca</span><br><span class="msg">para poder estudiar Derecho</span></p>
-                
-            </div> -->
             
         </div>
 
@@ -59,9 +34,12 @@
         
     </div>
 
-    <button id="chatbot_ai_button" class="chatbot_ai_button">
-        <span class="message_icon"><i class="fa-regular fa-message"></i></span>
-        <span class="no-show"><i class="fas fa-times"></i></span>
-    </button>
+    <div>
+        <a id="chatbot_ai_anchor_reset_chat" class="chatbot_ai_anchor_reset_chat no-show" href="#">reset chat</a>
+        <button id="chatbot_ai_button" class="chatbot_ai_button">
+            <span class="message_icon"><i class="fa-regular fa-message"></i></span>
+            <span class="no-show"><i class="fa fa-times" aria-hidden="true"></i></span>
+        </button>
+    </div>
 
 </div>
