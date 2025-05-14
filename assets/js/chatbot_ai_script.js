@@ -32,7 +32,7 @@ const sendMessageToChatbot = async (array_chat) => {
 
     if (server.status === 200) {
 
-        if (typeof response.error_code !== 'undefined' && response.error_code === 'insufficient_quota') {
+        if (typeof response.error_code !== 'undefined' && ( response.error_code === 'insufficient_quota' || response.error_code === 'invalid_api_key' ) ) {
             
             let message = "Lo siento, no puedo atenderte en estos momentos. Intentalo más tarde.";
 
