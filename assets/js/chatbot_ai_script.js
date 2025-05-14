@@ -21,11 +21,72 @@ const sendMessageToChatbot = async (array_chat) => {
         body : JSON.stringify(data),        
     };
 
-    console.log(options);
-    console.log(array_chat);
+    //console.log(options);
+    //console.log(array_chat);
     
     const server = await fetch(url, options);
     const response = await server.json();
+
+
+    console.log(server.status);
+
+    if (server.status === 200) {
+
+        if (typeof response.error_code !== 'undefined' && response.error_code === 'insufficient_quota') {
+            
+            let message = "Lo siento, no puedo atenderte en estos momentos. Intentalo más tarde.";
+
+            // TO DO: enviar mensaje de error al administrador
+            // sendErrorMessageToAdmin(response.error_message);
+
+            // enviar mensaje al usuario
+            enqueueChatBotMessages(message);    
+
+        }
+
+    }
+    
+
+}
+
+/**
+ * Esta funcion agrega el mensaje del usuario a la cola de mensajes
+ * esta cola es un array que se va llenando con los mensajes del usuario y el bot
+ * @param {string} bot_message 
+ */
+const enqueueChatBotMessages = (bot_message) => {
+       
+    let array_chat = [];
+
+    if (
+        typeof localStorage.chat === 'undefined' || 
+               localStorage.chat === 'null'      || 
+               localStorage.chat === ""
+       ){
+
+        array_chat = [
+            {
+                "role"      : "assistant",               
+                "content"   : bot_message
+            },
+        ];
+
+        localStorage.chat = JSON.stringify(array_chat);
+
+    }
+    else{
+
+        array_chat = JSON.parse(localStorage.chat);
+
+        const new_msg_obj = {"role":"assistant","content":bot_message};
+
+        array_chat[array_chat.length] = new_msg_obj;
+
+        localStorage.chat = JSON.stringify(array_chat);
+        
+    }
+
+    handleBotInput(bot_message);
 
 }
 
@@ -88,6 +149,31 @@ const setBotFirstMessage = () => {
     );
 
 };
+
+const handleBotInput = (bot_message) => {
+        
+    const lastchild = jQuery('.chatbot_ai_body_message_wrap').children().last();
+    
+    if (bot_message.length > 0) {
+
+        setTimeout(function() {
+
+            jQuery('.chatbot_ai_body_message_wrap').append(`
+
+                <div class="chatbot">
+                    
+                    <p>
+                        ${ ! lastchild.hasClass('chatbot') ? '<span class="title">Chatbot:</span><br>' : ''}
+                        <span class="msg">${bot_message}</span>
+                    </p>
+                </div>`
+            );            
+
+        },300);
+
+    }
+
+}
 
 const handleUserInput = () => {
     

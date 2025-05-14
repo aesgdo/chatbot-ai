@@ -14,16 +14,16 @@ Text Domain: akismet
 */
 
 
-// Seguridad: evitar acceso directo
+/* // Seguridad: evitar acceso directo
 if (!defined('ABSPATH')) {
     exit;
-}
+} */
 
 // incluimos el archivo de configuración
-include(plugin_dir_path(__FILE__).'admin/settings.php');
+include( plugin_dir_path(__FILE__) . 'admin/settings.php');
 
 // incluimos el archivo de que invoca las funciones actions y filters
-include(plugin_dir_path(__FILE__).'functions.php');
+include( plugin_dir_path(__FILE__) . 'functions.php');
 
 // incluimos jquery para el uso de ajax
 add_action('wp_enqueue_scripts', function() { wp_enqueue_script('jquery'); });

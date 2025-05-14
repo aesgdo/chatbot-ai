@@ -5,7 +5,7 @@
  * Esta funcion se comunica con la API de OpenAI para obtener una respuesta a partir de un mensaje.
  * Se utiliza el modelo gpt-4.1 por defecto, pero se puede cambiar el modelo si se desea.
  */
-function chatbot_ai_openai_completions($OPENAI_API_KEY, $model = "o4-mini", $messages) {
+function chatbot_ai_openai_completions($OPENAI_API_KEY, $messages, $model = "o4-mini") {
     
     // Modelos disponibles
     // $models = ["o4-mini","gpt-4.1","gpt-4.1-mini", "gpt-4.1-nano", "gpt-4o-mini", "o1-mini", "o3-mini"];
@@ -21,7 +21,7 @@ function chatbot_ai_openai_completions($OPENAI_API_KEY, $model = "o4-mini", $mes
         ["role" => "assistant", "content" => "Napoleón Bonaparte fue un líder militar y emperador francés que vivió entre 1769 y 1821."],
         ["role" => "user", "content" => "¿Y qué pasó con él en Waterloo?"]
     ];*/
-
+    
 
     $data = [
         "model" => $model,
@@ -41,20 +41,21 @@ function chatbot_ai_openai_completions($OPENAI_API_KEY, $model = "o4-mini", $mes
         //"max_tokens" => 1000, // Número máximo de tokens en la respuesta
     ];
     
-    
+    //return $data;
+
     $ch = curl_init($url); // Inicia la sesión cURL
+
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Devuelve la respuesta como string
-    
+
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Desactiva la verificación del certificado SSL (no recomendado en producción)
-    
+
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         'Content-Type: application/json',
         'Authorization: Bearer ' . $OPENAI_API_KEY,
     ]);
-    
+
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
 
     $response = curl_exec($ch); // Ejecuta la solicitud cURL
 
@@ -62,11 +63,32 @@ function chatbot_ai_openai_completions($OPENAI_API_KEY, $model = "o4-mini", $mes
         // Manejo de errores
         echo 'Error:' . curl_error($ch);
     } else {
+
         $response_data = json_decode($response, true); // Decodifica la respuesta JSON
+
+
+        if (isset($response_data['error'])) {
+            
+            $response = [
+                "message"       => "Error: " . $response_data['error']['message'],
+                "error_code"    => $response_data['error']['code'],                
+            ];
+
+            return $response;
+        }        
+
         if (isset($response_data['choices'][0]['message']['content'])) {
+
             return $response_data['choices'][0]['message']['content']; // Devuelve el contenido de la respuesta
+
         } else {
-            return "No se pudo obtener una respuesta válida.";
+
+            $response = [
+                "message"       => "Error: No se pudo obtener una respuesta válida.",
+                "error_code"    => 500,
+            ];
+
+            return $response;
         }
     }
 

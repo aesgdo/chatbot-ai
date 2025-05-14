@@ -1,34 +1,36 @@
 <?php
 
-/**
- * Este archivo contiene la carga de los archivos de funciones del plugin.
- * Se carga en el archivo principal del plugin.
- */
+    /**
+     * Este archivo contiene la carga de los archivos de funciones del plugin.
+     * Se carga en el archivo principal del plugin.
+     */
 
- /**
-  * Esta funcion incluye los archivos de funciones que se encuentran en el directorio src/actions y src/filters
-  */
-function include_files($files){
+    /**
+     * Esta funcion incluye los archivos de funciones que se encuentran en el directorio src/actions y src/filters
+    */
+    function include_files($files){
 
-    if (isset($files) && is_array($files)) {
-        for ($i=0; $i < count($files); $i++) { 
-            include($files[$i]);
-        }        
+        if (isset($files) && is_array($files)) {
+            for ($i=0; $i < count($files); $i++) { 
+                include($files[$i]);
+            }        
+        }
+        return;
     }
-    return;
-}
 
-// array con el nombre de los path a cargar
-$array_path = ['actions', 'filters'];
+    // array con el nombre de los path a cargar
+    $array_path = ['actions', 'filters'];
 
-foreach ($array_path as $path) {    
-    // glob devuelve un array con los nombres de los archivos que cumplen con el patron
-    // ex. $patron = plugin_dir_path(__FILE__).'/actions/*.php'; // Patron de busqueda
-    $files = glob( plugin_dir_path(__FILE__).'/src/'.$path.'/*.php' );
-    include_files($files);
-}
+    foreach ($array_path as $path) {    
+        // glob devuelve un array con los nombres de los archivos que cumplen con el patron
+        // ex. $patron = plugin_dir_path(__FILE__).'/actions/*.php'; // Patron de busqueda
 
-/**
+        $full_path = ( function_exists('plugin_dir_path') ? plugin_dir_path(__FILE__) : __DIR__ . '/') . 'src/'.$path.'/*.php';
+        $files = glob(  $full_path );
+        include_files($files);        
+    }
+
+    /**
      * Devuelve el codigo de respuesta del servidor especificado y un json con datos.
      * 
      * @param int    $http_response_code        Codigo que el servidor devolvera en la cabecera de respuesta
@@ -121,8 +123,9 @@ foreach ($array_path as $path) {
 
         $lang = isset($lang) ? $lang : $default;
         
+        $full_path = ( function_exists('plugin_dir_path') ? plugin_dir_path(__FILE__) : __DIR__ . '/') . 'src/languages/*.lang';        
         // recorre el directorio de idiomas buscando el idioma solicitado        
-        foreach ( glob(  CHATBOT_AI_BASE_PATH . '/languages/*.lang') as $filename){             
+        foreach ( glob($full_path) as $filename){             
             if ( strpos($filename , $lang . ".lang") > -1){
                 return $filename;
             }            

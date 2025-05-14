@@ -1,9 +1,4 @@
-<?php    
-    
-    // Seguridad: evitar acceso directo
-    if (!defined('ABSPATH')) {
-        exit;
-    }
+<?php      
     
     $json = file_get_contents('php://input');
     $array_data = json_decode($json, true);
@@ -21,4 +16,13 @@
         ]);
         exit;
     }
-     
+    
+    switch ($target) {
+        case 'openai_completions':
+            include_once( './controllers/OpenAIChat.php' );
+            break;
+        
+        default:
+            # code...
+            break;
+    }
