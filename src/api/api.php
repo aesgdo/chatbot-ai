@@ -18,9 +18,11 @@
     }
     
     switch ($target) {
-        case 'openai-completions':   include_once( './controllers/OpenAIChat.php' );        break;
-        case 'openai-update_model':  include_once( './controllers/OpenAIUpdateModel.php' ); break;        
-        case 'openai-update_apikey': include_once( './controllers/OpenAIUpdateAPIKey.php' ); break;
-        case 'openai-get_model':  include_once( './controllers/OpenAIGetModel.php' ); break;        
+        case 'openai-completions':          include_once( './controllers/OpenAIChat.php' );              break;
+        case 'openai-update_model':         include_once( './controllers/OpenAIUpdateModel.php' );       break;        
+        case 'openai-update_apikey':        include_once( './controllers/OpenAIUpdateAPIKey.php' );      break;
+        case 'openai-get_model':            include_once( './controllers/OpenAIGetModel.php' );          break;        
+        case 'openai-update_agentPrompt':   include_once( './controllers/OpenAIUpdateAgentPrompt.php' ); break;        
+        case 'openai-get_agentPrompt':      include_once( './controllers/OpenAIGetAgentPrompt.php' );    break;        
         default: /* code... */ break;
     }

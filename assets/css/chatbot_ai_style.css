@@ -219,6 +219,7 @@
 
 .chatbot_ai_body_message_wrap .chatbot{
     display: flex;
+    flex-direction: column;
     margin-right: auto;   
     width: 100%;
     justify-content: start;

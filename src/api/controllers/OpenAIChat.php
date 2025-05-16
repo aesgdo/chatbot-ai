@@ -25,7 +25,9 @@
         
         $model = get_option('chatbot_ai_openai_model');
 
-        $result = chatbot_ai_openai_completions( $openai_api_key , $array_messages, $model,  $system_role_content = "Eres un asistente útil.");
+        $system_role_content = htmlspecialchars(trim(get_option('chatbot_ai_openai_agent_prompt')));
+
+        $result = chatbot_ai_openai_completions( $openai_api_key , $array_messages, $model,  $system_role_content);
         
         if ( isset($result['error_code']) ) {
             on_exception_server_response( 403, [
@@ -38,6 +40,15 @@
             exit;
         }
 
+
+        if ( isset($result['choices'][0]['message']['content']) ) {
+            $result = [
+                "message"       => arr_multi_lang($result['choices'][0]['message']['content']),
+                "error_code"    => 200,
+                "status"        => "OK",
+                "target"        => $target,
+            ];
+        } 
 
     }
 

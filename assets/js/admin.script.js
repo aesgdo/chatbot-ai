@@ -81,6 +81,47 @@ const updateChatbotAIApiKey = async (api_key) => {
 
 };
 
+
+const updateAgentPrompt = async (agent_prompt) => {
+
+    try {
+        
+        const url = HTTP_HOST + '/wp-content/plugins/chatbot-ai/src/api/index.php';
+    
+        const data = {
+            prompt : agent_prompt,
+            target : 'openai-update_agentPrompt',
+        };
+        
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body : JSON.stringify(data),        
+        };
+    
+        //console.log(options);
+        //console.log(array_chat);
+        
+        const server = await fetch(url, options);
+        const response = await server.json();
+    
+    
+        console.log(server.status);    
+            
+        // enviar mensaje al usuario
+        //enqueueChatBotMessages(response.message.lang_es);    
+
+    } catch (error) {
+        
+        console.error('Error:', error);
+        // enviar mensaje al usuario
+        //enqueueChatBotMessages("Lo siento, no puedo ayudarte en este momento. Por favor, inténtalo más tarde.");
+    }
+
+};
+
 const handleClickApikeyModel = (apikey = '') => {
 
 
@@ -94,6 +135,14 @@ const handleChangeModel = (model = 'o4-mini') => {
     updateChatbotAIModel(model);
 
 }
+
+const handleClickAgentPromt = (agentPrompt = '') => {
+
+
+    updateAgentPrompt(agentPrompt);
+
+}
+
 
 jQuery(window).on('load', () => {
 
@@ -116,5 +165,18 @@ jQuery(window).on('load', () => {
         handleChangeModel(model);
 
     });
+
+    /* Agent Training Options */
+    // Handle change of 
+    jQuery('.chatbot_ai_train_button').on('click', (ev) => {
+        ev.preventDefault();
+        let agentPrompt = jQuery('.chatbot_ai_agent_prompt').val();
+
+        handleClickAgentPromt(agentPrompt);
+
+    });
+    
+
+
         
 });

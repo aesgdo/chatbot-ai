@@ -10,7 +10,9 @@ function chatbot_ai_openai_completions($OPENAI_API_KEY, $messages, $model = "o4-
     if (empty($model)) {
         $model = "o4-mini"; // Modelo por defecto
     }
-
+    if (empty($system_role_content)) {
+        $system_role_content = "Eres un asistente útil."; // Modelo por defecto
+    }
     // Modelos disponibles
     // $models = ["o4-mini","gpt-4.1","gpt-4.1-mini", "gpt-4.1-nano", "gpt-4o-mini", "o1-mini", "o3-mini"];
 
@@ -39,13 +41,15 @@ function chatbot_ai_openai_completions($OPENAI_API_KEY, $messages, $model = "o4-
                 "content" => $messages
             ] */
         ],
-        "temperature" => 0.3, // Controla la aleatoriedad de la respuesta 0.0 a 1.0 (1.0 es mas creativo y aleatorio)
+        //"temperature" => 0.3, // Controla la aleatoriedad de la respuesta 0.0 a 1.0 (1.0 es mas creativo y aleatorio)
         //"top_p" => 1, // Controla la diversidad de la respuesta 0.0 a 1.0
         //"frequency_penalty" => 0, // Penaliza la repetición de palabras 0.0 a 2.0
         //"max_tokens" => 1000, // Número máximo de tokens en la respuesta
     ];
     
     $data["messages"] = array_merge($data["messages"], $messages); // Agrega los mensajes del usuario al array de mensajes
+
+    //var_dump($data); die();
 
     //return $data;
 
@@ -72,7 +76,6 @@ function chatbot_ai_openai_completions($OPENAI_API_KEY, $messages, $model = "o4-
 
         $response_data = json_decode($response, true); // Decodifica la respuesta JSON
 
-
         if (isset($response_data['error'])) {
             
             $response = [
@@ -85,7 +88,7 @@ function chatbot_ai_openai_completions($OPENAI_API_KEY, $messages, $model = "o4-
 
         if (isset($response_data['choices'][0]['message']['content'])) {
 
-            return $response_data['choices'][0]['message']['content']; // Devuelve el contenido de la respuesta
+            return $response_data;
 
         } else {
 
