@@ -4,7 +4,7 @@ const updateChatbotAIModel = async (ai_model) => {
 
     try {
         
-        const url = './../wp-content/plugins/chatbot-ai/src/api/index.php';
+        const url = HTTP_HOST + '/wp-content/plugins/chatbot-ai/src/api/index.php';
     
         const data = {
             model   : ai_model,
@@ -45,7 +45,7 @@ const updateChatbotAIApiKey = async (api_key) => {
 
     try {
         
-        const url = './../wp-content/plugins/chatbot-ai/src/api/index.php';
+        const url = HTTP_HOST + '/wp-content/plugins/chatbot-ai/src/api/index.php';
     
         const data = {
             apikey : api_key,

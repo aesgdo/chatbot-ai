@@ -1,0 +1,1 @@
+const HTTP_HOST = window.location.protocol + "//" + window.location.hostname;

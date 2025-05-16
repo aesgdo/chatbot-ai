@@ -9,7 +9,7 @@ const sendMessageToChatbot = async (array_chat) => {
 
     try {
         
-        const url = './wp-content/plugins/chatbot-ai/src/api/index.php';
+        const url = HTTP_HOST + '/wp-content/plugins/chatbot-ai/src/api/index.php';
     
         const data = {
             chat   : array_chat,
@@ -31,7 +31,7 @@ const sendMessageToChatbot = async (array_chat) => {
         const response = await server.json();
     
     
-        console.log(server.status);    
+        console.log(server.status); 
             
         // enviar mensaje al usuario
         enqueueChatBotMessages(response.message.lang_es);    
