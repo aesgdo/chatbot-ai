@@ -39,8 +39,10 @@
 }
 
 /* container */
-.chatbot_ai_wrapper .chatbot_ai_container{
+.chatbot_ai_wrapper .chatbot_ai_container,
+.chatbot_ai_wrapper .chatbot_ai_container p{
     font-size: 12px;
+    margin: 5px;
 }
 
 .chatbot_ai_wrapper .chatbot_ai_container.expanded{
@@ -198,7 +200,7 @@
 .chatbot_ai_body_input_wrap .chatbot_ai_btn_start.chat_started{
     width: 40px;
     text-align: center;
-    height: 36px;
+    height: 40px;
     color: #ffffff;
     font-size: 16px;
     padding: 5px;
