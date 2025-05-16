@@ -6,45 +6,44 @@
  */
 const sendMessageToChatbot = async (array_chat) => {
 
-    const url = './wp-content/plugins/chatbot-ai/src/api/index.php';
 
-    const data = {
-        chat   : array_chat,
-        target : 'openai_completions',
-    };
+    try {
+        
+        const url = './wp-content/plugins/chatbot-ai/src/api/index.php';
     
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body : JSON.stringify(data),        
-    };
-
-    //console.log(options);
-    //console.log(array_chat);
+        const data = {
+            chat   : array_chat,
+            target : 'openai-completions',
+        };
+        
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body : JSON.stringify(data),        
+        };
     
-    const server = await fetch(url, options);
-    const response = await server.json();
-
-
-    console.log(server.status);
-
-    if (server.status === 200) {
-
-        if (typeof response.error_code !== 'undefined' && ( response.error_code === 'insufficient_quota' || response.error_code === 'invalid_api_key' ) ) {
+        //console.log(options);
+        //console.log(array_chat);
+        
+        const server = await fetch(url, options);
+        const response = await server.json();
+    
+    
+        console.log(server.status);    
             
-            let message = "Lo siento, no puedo atenderte en estos momentos. Intentalo más tarde.";
+        // enviar mensaje al usuario
+        enqueueChatBotMessages(response.message.lang_es);    
 
-            // TO DO: enviar mensaje de error al administrador
-            // sendErrorMessageToAdmin(response.error_message);
-
-            // enviar mensaje al usuario
-            enqueueChatBotMessages(message);    
-
-        }
-
+    } catch (error) {
+        
+        console.error('Error:', error);
+        // enviar mensaje al usuario
+        enqueueChatBotMessages("Lo siento, no puedo ayudarte en este momento. Por favor, inténtalo más tarde.");
     }
+
+    
     
 
 }

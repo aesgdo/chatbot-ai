@@ -5,12 +5,12 @@
  * Esta funcion se comunica con la API de OpenAI para obtener una respuesta a partir de un mensaje.
  * Se utiliza el modelo gpt-4.1 por defecto, pero se puede cambiar el modelo si se desea.
  */
-function chatbot_ai_openai_completions($OPENAI_API_KEY, $messages, $model = "o4-mini") {
+function chatbot_ai_openai_completions($OPENAI_API_KEY, $messages, $model = "o4-mini", $system_role_content = "Eres un asistente útil.") {
     
     // Modelos disponibles
     // $models = ["o4-mini","gpt-4.1","gpt-4.1-mini", "gpt-4.1-nano", "gpt-4o-mini", "o1-mini", "o3-mini"];
 
-    $url = 'https://api.openai.com/v1/chat/completions';
+    $url = OPENAI_API_URL; // URL de la API de OpenAI -> ver settings.php    
 
 
     // para mantener el contexto se debe enviar el mensaje anterior y la respuesta del asistente
@@ -28,7 +28,7 @@ function chatbot_ai_openai_completions($OPENAI_API_KEY, $messages, $model = "o4-
         "messages" => [
             [
                 "role" => "system", 
-                "content" => "Eres un asistente útil."
+                "content" => $system_role_content
             ],
             [
                 "role" => "user", 

@@ -7,4 +7,4 @@
 
     define('CHATBOT_AI_LANG', 'es');
 
-    define('OPENAI_API_KEY', '');
+    define('OPENAI_API_URL', 'https://api.openai.com/v1/chat/completions');

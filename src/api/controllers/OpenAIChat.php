@@ -1,4 +1,4 @@
-<?php // target: openai_completions
+<?php // target: openai-completions
 
     $result = [
         "message"       => "Error: Faltan parametros.",            
@@ -21,8 +21,23 @@
             exit;
         }
     
+        $openai_api_key = get_option('chatbot_ai_openai_api_key');
         
-        $result = chatbot_ai_openai_completions( OPENAI_API_KEY , $array_messages, $model = "o4-mini");
+        $model = get_option('chatbot_ai_openai_model');
+
+        $result = chatbot_ai_openai_completions( $openai_api_key , $array_messages, $model,  $system_role_content = "Eres un asistente útil.");
+        
+        if ( isset($result['error_code']) ) {
+            on_exception_server_response( 403, [
+                "message"       => arr_multi_lang("Lo siento, no puedo atenderte en estos momentos. Intentalo más tarde."),
+                "target"        => $target,
+                "error_code"    => $result['error_code'],
+                "data"          => [],
+                "send_result"   => true,
+            ]);            
+            exit;
+        }
+
 
     }
 

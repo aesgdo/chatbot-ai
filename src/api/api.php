@@ -18,11 +18,9 @@
     }
     
     switch ($target) {
-        case 'openai_completions':
-            include_once( './controllers/OpenAIChat.php' );
-            break;
-        
-        default:
-            # code...
-            break;
+        case 'openai-completions':   include_once( './controllers/OpenAIChat.php' );        break;
+        case 'openai-update_model':  include_once( './controllers/OpenAIUpdateModel.php' ); break;        
+        case 'openai-update_apikey': include_once( './controllers/OpenAIUpdateAPIKey.php' ); break;
+        case 'openai-get_model':  include_once( './controllers/OpenAIGetModel.php' ); break;        
+        default: /* code... */ break;
     }
