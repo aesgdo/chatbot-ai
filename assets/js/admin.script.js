@@ -100,8 +100,6 @@ jQuery(window).on('load', () => {
 
     jQuery('.chatbot_ai_apikey_button').on('click', (ev) => {
         ev.preventDefault();
-        console.log('Apikey: ', jQuery('.chatbot_ai_openai_apikey').val() );
-
         let apikey = jQuery('.chatbot_ai_openai_apikey').val();
 
         handleClickApikeyModel(apikey);
