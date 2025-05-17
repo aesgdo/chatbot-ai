@@ -66,7 +66,7 @@ const sendMessageToChatbot = async (array_chat) => {
 const scrollToBottom = () => {
 
     const chatBody = jQuery('.chatbot_ai_body.chat_started')[0];
-    console.log(chatBody);
+    
     const scrollHeight = chatBody.scrollHeight;
 
     setTimeout(function() {

@@ -170,6 +170,7 @@
     transition: 0.3s ease-in-out;
     position: absolute;
     bottom: 20px;
+    left: 14px;
     width: calc(100% - 30px);
 }
 
