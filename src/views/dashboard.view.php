@@ -2,18 +2,14 @@
     <div class="container">
         <h1>Dashboard</h1>
         <p>Welcome to the Chatbot AI Dashboard!</p>
-        <p>Here you can manage your chatbot settings, view analytics, and more.</p>
+        <p>Here you can manage your chatbot settings.</p>
     </div>
     <div class="container">
-        <h2>Recent Activity</h2>
-        <ul>
-            <li>User John Doe started a new conversation.</li>
-            <li>User Jane Smith updated her profile.</li>
-            <li>User Mark Johnson sent a message.</li>
-        </ul>
+        <h2>APIs Settings</h2>
+        <p>Configure your API keys and models. <a href="./admin.php?page=chatbot-ai-api-settings">Click here</a></p>        
     </div>
     <div class="container">
-        <h2>Settings</h2>
-        <button class="btn btn-primary">Update Settings</button>
+        <h2>Agent Training </h2>
+        <p>Personalize the bot interaction's user and model. <a href="./admin.php?page=chatbot-ai-agent-training">Click here</a></p>
     </div>
 </section>
