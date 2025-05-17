@@ -134,6 +134,7 @@
     padding: 5px;
     display: flex;
     justify-content: center;
+    overflow-x: hidden;
 }
 
 .chatbot_ai_image_wrap{    
