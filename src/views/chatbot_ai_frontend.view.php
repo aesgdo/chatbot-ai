@@ -30,6 +30,13 @@
                 <span class="send_msg_icon no-show"><i class="fa-regular fa-paper-plane"></i></span>
             </button>
         </div>
+
+        <div class="chatbot_ai_spinner_wrap no-show">
+            <span class="span_spinner one"></span>
+            <span class="span_spinner two"></span>
+            <span class="span_spinner three"></span>
+        </div>
+
     </div>
         
     </div>

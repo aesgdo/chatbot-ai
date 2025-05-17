@@ -1,4 +1,14 @@
 
+const chatbotSpinner = ( state = 'hide' ) => {
+
+    if ( state === 'show' ) {
+        jQuery('.chatbot_ai_spinner_wrap').removeClass('no-show');
+    } else {
+        jQuery('.chatbot_ai_spinner_wrap').addClass('no-show');
+    }
+};
+
+
 /**
  * Esta funcion se encarga de enviar el mensaje al servidor
  * y recibir la respuesta del chatbot
@@ -6,6 +16,7 @@
  */
 const sendMessageToChatbot = async (array_chat) => {
 
+    chatbotSpinner('show');
 
     try {
         
@@ -32,13 +43,17 @@ const sendMessageToChatbot = async (array_chat) => {
     
     
         console.log(server.status); 
-            
+          
+        chatbotSpinner('hide');
         // enviar mensaje al usuario
         enqueueChatBotMessages(response.message.lang_es);    
 
     } catch (error) {
         
         console.error('Error:', error);
+        
+        chatbotSpinner('hide');
+
         // enviar mensaje al usuario
         enqueueChatBotMessages("Lo siento, no puedo ayudarte en este momento. Por favor, inténtalo más tarde.");
     }
@@ -46,6 +61,17 @@ const sendMessageToChatbot = async (array_chat) => {
     
     
 
+}
+
+const scrollToBottom = () => {
+
+    const chatBody = jQuery('.chatbot_ai_body.chat_started')[0];
+    console.log(chatBody);
+    const scrollHeight = chatBody.scrollHeight;
+
+    setTimeout(function() {
+            chatBody.scrollTop  = scrollHeight;
+    }, 300);
 }
 
 /**
@@ -84,6 +110,8 @@ const enqueueChatBotMessages = (bot_message) => {
         localStorage.chat = JSON.stringify(array_chat);
         
     }
+
+    
 
     handleBotInput(bot_message);
 
@@ -168,9 +196,13 @@ const handleBotInput = (bot_message) => {
                 </div>`
             );            
 
+            scrollToBottom();
+            
         },300);
 
+
     }
+
 
 }
 
@@ -195,6 +227,8 @@ const handleUserInput = () => {
                     </p>
                 </div>`
             );
+
+            scrollToBottom();
 
             enqueueUserMessages(user_message);
 
