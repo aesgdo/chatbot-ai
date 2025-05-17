@@ -16,4 +16,17 @@ Descarque el repositorio completo.
 
 En la sección APIs, agregue su API key de OpenAI y seleccione el modelo a utilizar.
 
-...
+Puede personalizar el comportamiento del bot escribiendo su propio prompt indicandole como y que responderle al usuario.
+
+### Demo en Linea 
+
+[aibuzz.today](https://aibuzz.today)
+
+
+### Dona
+
+Si te gusta este proyecto puedes colaborar con el mismo.
+
+¿Por qué donar? con tu apoyo ayudas a otros a seguir creando y mejorando la comunidad de desarrollo.
+
+* [Click aqui para ir a Paypal](https://www.paypal.com/paypalme/albertto2050)
